@@ -36,6 +36,7 @@ class QuestionsSummary extends StatelessWidget {
                         Text(data['question'] as String,style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
+                          fontStyle: FontStyle.italic,
                         ),),
                         const SizedBox(height: 10,),
                         Text(
