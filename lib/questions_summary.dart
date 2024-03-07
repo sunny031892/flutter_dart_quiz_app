@@ -13,29 +13,47 @@ class QuestionsSummary extends StatelessWidget {
         child: Column(
           children: summaryData.map(
             (data) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  children: [
-                    Text(((data['question'] as int) + 1).toString()),
-                    SizedBox(width: 8.0),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(data['question'] as String),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(data['user_answer'] as String),
-                          Text(data['correct_answer'] as String),
-                        ],
-                      ),
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(5),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: data['user_answer'] == data['correct_answer']
+                            ? const Color.fromARGB(255, 150, 198, 241)
+                            : const Color.fromARGB(255, 249, 133, 241)),
+                    child: Text(
+                      ((data['question_index'] as int) + 1).toString(),
                     ),
-                  ],
-                ),
+                  ),
+                const SizedBox(width: 5,),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(data['question'] as String,style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),),
+                        const SizedBox(height: 10,),
+                        Text(
+                          data['user_answer'] as String,
+                          style: const TextStyle(color: Color.fromARGB(255, 202, 171, 252)),
+                        ),
+                        Text(
+                          data['correct_answer'] as String,
+                          style:const  TextStyle(color: Color.fromARGB(255, 181, 254, 246),),
+                        ),
+                        const SizedBox(height: 10,),
+                      ],
+                  
+                    ),
+                  )
+                ],
               );
-            },
+            }
           ).toList(),
         ),
       ),

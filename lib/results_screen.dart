@@ -33,8 +33,8 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final numTotalQuestions = questions.length;
-    final numCorrectQuestions = summaryData.where((data) {
+    final numTotalQuestion = questions.length;
+    final numCorrectQuestion = summaryData.where((data) {
       return data['user_answer'] == data['correct_answer'];
     }).length;
 
@@ -47,6 +47,18 @@ class ResultsScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Text(
+                'You got $numCorrectQuestion out of $numTotalQuestion questions correctly!',
+                style: const TextStyle(fontSize: 18,),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              QuestionsSummary(summaryData),
+              const SizedBox(
+                height: 30,
+              ),
               TextButton.icon(
                 onPressed: _onRestart,
                 style: TextButton.styleFrom(
@@ -55,20 +67,10 @@ class ResultsScreen extends StatelessWidget {
                 icon: const Icon(Icons.refresh),
                 label: const Text('Restart Quiz!'),
               ),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              QuestionsSummary(summaryData),
             ],
           ),
         ),
-      ),
+      )
     );
   }
 }
